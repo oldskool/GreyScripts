@@ -1,0 +1,18 @@
+// LibScanner v1.0 - by Oldskool
+metax = include_lib("/lib/metaxploit.so")
+
+if metax == null then
+	metax = include_lib(current_path + "/metaxploit.so")
+end if
+
+if metax == null then exit("Cannot find metaxploit.so")
+
+libFolder = get_shell.host_computer.File("/lib")
+
+if libFolder.is_folder then
+	files = libFolder.get_files
+	for file in files
+		metaLib = metax.load("/lib/" + file.name)
+		print("Found " + metaLib.lib_name + " v" + metaLib.version)
+	end for
+end if
