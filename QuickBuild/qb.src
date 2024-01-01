@@ -1,0 +1,8 @@
+// QuickBuild v1.0 - by Oldskool
+if params.len != 1 or params[0] == "-h" or params[0] == "--help" then exit("<b>Usage: " + program_path.split("/")[-1] + " [source file]</b>")
+pwd = current_path
+file = get_shell.host_computer.File(pwd + "/" + params[0])
+if file == null then exit(params[0] + ": file not found")
+print("Building " + file.name + " into " + pwd)
+err = get_shell.build(file.path, pwd)
+if err.len > 1 then exit(err) else print("Success!")
